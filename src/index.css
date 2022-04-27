@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'iconic';
+    src:url('~@/assets/fonts/FC-Iconic-Regular.woff') format('woff');
+  }
+  
+
+body,html{
+    font-family: 'iconic';
+}
+
+label{
+    margin-bottom: 0.5rem;
+}
+.form-group {
+    @apply flex flex-col mb-8;
+  }
