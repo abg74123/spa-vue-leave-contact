@@ -5,7 +5,7 @@ const API_Name =
 const API_Path = "/webhook";
 
 export default class ApiService {
-    lineNotify() {
-        axios.post(`${API_Name}${API_Path}/register/linenotify`);
+    lineNotify(body) {
+        axios.post(`${API_Name}${API_Path}/register/linenotify`, body);
     }
 }

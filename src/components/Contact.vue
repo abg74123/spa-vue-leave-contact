@@ -10,6 +10,13 @@
     >
       <div class="place-self-center w-full">
         <div class="m-5 md:mx-10 lg:mx-32">
+          <img
+            class="mb-4"
+            style="width: 200px"
+            :src="require('@/assets/images/logo_bizup.png')"
+            alt=""
+          />
+
           <div class="text-main mb-2">Register</div>
           <div class="text-base mb-10 text-justify">
             ไฟลท์แรงใจแผดเผาเอ๋แซ็กโซโฟน พาสต้าจตุคามเกย์
@@ -27,19 +34,20 @@
                   id="txt_name_comp"
                   placeholder="Name Company"
                   type="text"
-                  v-model="fromContact.compName"
+                  v-model="fromContact.businessName"
                 />
               </div>
               <div class="form-group">
                 <label class="text-label" for="txt_name_user"
-                  >ชื่อผู้ติดต่อ</label
+                  >ชื่อผู้ติดต่อ <span class="text-red-500">*</span></label
                 >
                 <InputText
                   class="w-full"
                   id="txt_name_user"
                   placeholder="ชื่อผู้ติดต่อ"
                   type="text"
-                  v-model="fromContact.userName"
+                  v-model="fromContact.fullName"
+                  required
                 />
               </div>
               <div class="flex flex-col md:flex-row gap-4">
@@ -61,39 +69,42 @@
                   }}</small>
                 </div>
                 <div class="flex-1 form-group">
-                  <label class="text-label" for="txt_tel">เบอร์โทร</label>
+                  <label class="text-label" for="txt_tel"
+                    >เบอร์โทร <span class="text-red-500">*</span></label
+                  >
                   <InputMask
                     class="w-full"
                     id="txt_tel"
                     placeholder="เบอร์โทร"
                     v-model="fromContact.tel"
-                    mask="(999) 999-9999"
+                    mask="999-999-9999"
+                    required
                   />
                 </div>
               </div>
               <div class="flex flex-col md:flex-row gap-4">
                 <div class="flex-1 form-group">
                   <label class="text-label" for="txt_date"
-                    >วันที่ต้องการให้ติดต่อ</label
+                    >วันที่สะดวกให้ติดต่อกลับ</label
                   >
                   <Calendar
                     class="w-full"
-                    placeholder="วันที่ต้องการให้ติดต่อ"
+                    placeholder="วันที่สะดวกให้ติดต่อกลับ"
                     id="txt_date"
                     v-model="fromContact.dateContact"
                   />
                 </div>
                 <div class="flex-1 form-group">
                   <label class="text-label" for="txt_date_range"
-                    >ช่วงเวลาติดต่อ</label
+                    >ช่วงเวลาที่สะดวก</label
                   >
                   <Calendar
                     class="w-full"
-                    placeholder="วันที่ต้องการให้ติดต่อ"
+                    placeholder="ช่วงเวลาที่สะดวก"
                     id="txt_date_range"
                     v-model="fromContact.timeContact"
                     :timeOnly="true"
-                    hourFormat="12"
+                    hourFormat="24"
                   />
                 </div>
               </div>
@@ -186,8 +197,8 @@ export default {
         email: "",
       },
       fromContact: {
-        compName: "",
-        userName: "",
+        businessName: "",
+        fullName: "",
         email: "",
         tel: "",
         dateContact: null,
@@ -217,14 +228,18 @@ export default {
   },
   methods: {
     submitForm() {
-      alert(JSON.stringify(this.fromContact));
-      _lineNotify.lineNotify();
+      if (!this.msg.email) {
+        _lineNotify.lineNotify(this.fromContact);
+      } else {
+        document.getElementById("txt_email").focus();
+      }
     },
     validateEmail() {
       if (
         !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
           this.fromContact.email
-        )
+        ) &&
+        this.fromContact.email
       ) {
         this.msg["email"] = "Please enter a valid email address";
       } else {
