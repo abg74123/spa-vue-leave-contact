@@ -176,6 +176,8 @@
 </template>
 
 <script>
+import ApiService from "../core/api.service.ts";
+const _lineNotify = new ApiService();
 export default {
   name: "ContactComp",
   data() {
@@ -216,6 +218,7 @@ export default {
   methods: {
     submitForm() {
       alert(JSON.stringify(this.fromContact));
+      _lineNotify.lineNotify();
     },
     validateEmail() {
       if (
