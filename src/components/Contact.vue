@@ -26,7 +26,7 @@
             เซ็กซี่โฟนรีไซเคิลสมาพันธ์ ดีไซน์เนอร์โรแมนติค
           </div>
           <div class="">
-            <form @submit.prevent="submitForm">
+            <form @submit="submitForm">
               <div class="form-group">
                 <label class="text-label" for="txt_name_comp">ชื่อบริษัท</label>
                 <InputText
