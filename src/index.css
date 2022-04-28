@@ -13,6 +13,25 @@ body,html{
     font-family: 'iconic';
 }
 
+.text-main{
+  font-size: 32px;
+  font-weight: bold;
+}
+.text-label{
+  font-size: 16px;
+  font-weight: bold;
+}
+.btn-submit{
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 10px;
+  opacity: 1;
+  width: 181px;
+  height: 52px;
+  background: #32BDC7;
+  font-size: 30px;
+  color: #FFFFFF;
+}
+
 label{
     margin-bottom: 0.5rem;
 }
